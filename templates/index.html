@@ -1,0 +1,122 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+<body>
+    <div class="container" style="text-align: center;">
+        <div class="sender">
+            <h3>Sender Details</h3>
+            <form id="fcf-form-id" class="fcf-form-class" method="post" action="">
+
+                <div class="fcf-form-group">
+                    <label for="Name" class="fcf-label">Name</label>
+                    <div class="fcf-input-group">
+                        <input type="text" id="Name" name="Sender_Name" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="Address" class="fcf-label">Street Address</label>
+                    <div class="fcf-input-group">
+                        <input type="email" id="Address" name="Sender_Address" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="City" class="fcf-label">City</label>
+                    <div class="fcf-input-group">
+                        <input id="City" name="Sender_City" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="City" class="fcf-label">Country</label>
+                    <div class="fcf-input-group">
+                        <input id="Country" name="Sender_Country" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <hr>
+        <div class="recipient">
+            <h3>Recipient Details</h3>
+            <form id="fcf-form-id" class="fcf-form-class" method="post" action="contact-form-process.php">
+                <div class="fcf-form-group">
+                    <label for="Name" class="fcf-label">Name</label>
+                    <div class="fcf-input-group">
+                        <input type="text" id="Name" name="Sender_Name" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="Address" class="fcf-label">Street Address</label>
+                    <div class="fcf-input-group">
+                        <input type="email" id="Address" name="Sender_Address" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="City" class="fcf-label">City</label>
+                    <div class="fcf-input-group">
+                        <input id="City" name="Sender_City" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="City" class="fcf-label">Country</label>
+                    <div class="fcf-input-group">
+                        <input id="Country" name="Sender_Country" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+                <div class="fcf-form-group">
+                    <label for="Date" class="fcf-label">Despatch Date</label>
+                    <div class="fcf-input-group">
+                       <input type="date" id="Date" name="Date" value="2021-09-22" class="fcf-form-control" required>
+                    </div>
+                </div>
+                <div class="fcf-form-group">
+                    <label for="Value" class="fcf-label">Value</label>
+                    <div class="fcf-input-group">
+                       <input type="number" id="Value" name="Value" class="fcf-form-control" required>
+                    </div>
+                </div>
+                <div class="fcf-form-group">
+                    <label for="Content" class="fcf-label">Content</label>
+                    <div class="fcf-input-group">
+                        <input id="Content" name="Content" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+                <div class="fcf-form-group">
+                    <label for="Insurance" class="fcf-label">Insurance</label>
+                    <div class="fcf-input-group">
+                    <label>
+                        <select>
+                          <option value="">---</option>
+                          <option value="">Yes</option>
+                          <option value="">No</option>
+                        </select>
+                      </label>
+                      </div>
+                </div>
+                <div class="fcf-form-group">
+                    <label for="Tracking_Number" class="fcf-label">Tracking Number</label>
+                    <div class="fcf-input-group">
+                        <input id="Tracking_Number" name="Tracking_Number" class="fcf-form-control" required></input>
+                    </div>
+                </div>
+                <br>
+                <div class="fcf-form-group">
+                    <button type="submit" id="fcf-button"
+                        class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}
