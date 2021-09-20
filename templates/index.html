@@ -9,7 +9,7 @@
 <body style="background-color: rgb(212, 241, 241);">
     <div class="container" style="text-align: center;">
         <div>
-            <form id="fcf-form-id" class="fcf-form-class" method="POST" action="{{ url_for('orders') }}">
+            <form id="fcf-form-id" class="fcf-form-class" method="POST" action="{{ url_for('index') }}">
                 <div class="sender">
                     <h3>Sender Details</h3>
                     <div class="fcf-form-group">
@@ -47,28 +47,28 @@
                     <div class="fcf-form-group">
                         <label for="Name" class="fcf-label">Name</label>
                         <div class="fcf-input-group">
-                            <input type="text" id="Name" name="Sender_Name" class="fcf-form-control" required>
+                            <input type="text" id="Name" name="Recipient_Name" class="fcf-form-control" required>
                         </div>
                     </div>
 
                     <div class="fcf-form-group">
                         <label for="Address" class="fcf-label">Street Address</label>
                         <div class="fcf-input-group">
-                            <input type="text" id="Address" name="Sender_Address" class="fcf-form-control" required>
+                            <input type="text" id="Address" name="Recipient_Address" class="fcf-form-control" required>
                         </div>
                     </div>
 
                     <div class="fcf-form-group">
                         <label for="City" class="fcf-label">City</label>
                         <div class="fcf-input-group">
-                            <input id="City" name="Sender_City" class="fcf-form-control" required></input>
+                            <input id="City" name="Recipient_City" class="fcf-form-control" required></input>
                         </div>
                     </div>
 
                     <div class="fcf-form-group">
                         <label for="City" class="fcf-label">Country</label>
                         <div class="fcf-input-group">
-                            <input id="Country" name="Sender_Country" class="fcf-form-control"
+                            <input id="Country" name="Recipient_Country" class="fcf-form-control"
                                 style="text-transform:uppercase" required></input>
                         </div>
                     </div>
@@ -95,10 +95,9 @@
                         <label for="Insurance" class="fcf-label">Insurance</label>
                         <div class="fcf-input-group">
                             <label>
-                                <select>
-                                    <option value="">---</option>
-                                    <option name="Yes" value="True">Yes</option>
-                                    <option name="False" value="False">No</option>
+                                <select name="Insurance">
+                                    <option  value="True">Yes</option>
+                                    <option  value="False">No</option>
                                 </select>
                             </label>
                         </div>
@@ -117,9 +116,6 @@
         </form>
     </div>
     </div>
-    <div>
-        <a class=" btn" href="{{ url_for('orders') }}">orders</a>
-                    </div>
 </body>
 
 </html>

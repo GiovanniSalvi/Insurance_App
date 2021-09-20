@@ -1,10 +1,11 @@
 {% block body %}
 <h2 style="text-align: center;">Package</h2>
 <div style="text-align: center;">
+<form class="row" method="POST" action="{{ url_for('orders') }}"></form>
 <p style="font-size:xx-large;color:crimson">Sender Details</p>
 <div>
     <div style="display: inline-flex; text-align: center;">
-        <h4>Name:<h3> Carole</h3>
+        <h4>Name:<h3>{{ order.senderName }}</h3>
         </h4>
     </div>
 </div>
@@ -32,7 +33,7 @@
     <p style="font-size:xx-large;color:crimson">Recipient Details</p>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Name:<h3> </h3>
+            <h4>Name:<h3></h3>
             </h4>
         </div>
     </div>
@@ -110,5 +111,6 @@
             </h4>
         </div>
     </div>
+</form>
 </div>
 {% endblock %}
