@@ -9,8 +9,13 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     #if request.method == "POST":
-
     return render_template("index.html")
+
+
+@app.route("/Orders/", methods=["GET"])
+def orders():
+
+    return render_template("orders.html")
 
 
 if __name__ == "__main__":

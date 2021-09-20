@@ -1,7 +1,11 @@
 .sender{
     min-height: fit-content;
 }
-.recipient{
+/*.recipient{
     min-height: fit-content;
     padding: 40px;
+}*/
+input{
+    min-width: 40%;
 }
+
