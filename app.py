@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route("/index/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        value = int(request.form.get('Value'))
+        value = float(request.form.get('Value'))
         print(value)
         despatchDate = request.form.get('Date')
         recipientCountry = request.form.get('Recipient_Country').upper()
@@ -35,46 +35,49 @@ def index():
         )
         acceptedAt = datetime.datetime.now()
         print(acceptedAt)
-        if value < 10000 and existing_trackingNumber is False:
-            if  insuranceProvided == 'True':
+        if value < 10000 and existing_trackingNumber != True:
+            print('value')
+            if insuranceProvided == 'True':
                 print('true')
+                insuranceProvided = 'Yes'
+                print('yes')
                 if recipientCountry == 'GB':
                     print(recipientCountry)
                     insuranceCharge = round(value * 0.01, 3)
-                    print(insuranceCharge)                       
-                    if recipientCountry == 'DE' or recipientCountry == 'NE' or recipientCountry == 'FR':
-                        insuranceCharge = round(value * 0.015, 3)
-                    else:
-                        insuranceCharge = round(value * 0.04, 3)                        
-                    if  insuranceCharge < 9.00:
-                            insuranceCharge = 9.00   
-            else:   
-                insuranceCharge = 0.00
-                insuranceProvided == 'False'
-        ipt = round(insuranceCharge * 0.12, 3) 
+                    print(insuranceCharge)
+                if recipientCountry == 'DE' or recipientCountry == 'NE' or recipientCountry == 'FR' or recipientCountry == 'BE':
+                    insuranceCharge = round(value * 0.015, 3)
+                else:
+                    insuranceCharge = round(value * 0.04, 3)   
+        else:
+            insuranceCharge = 0.00
+            insuranceProvided == 'False'
+        if  insuranceCharge < 9.00:
+            insuranceCharge 9.00
+        ipt = round(insuranceCharge * 0.12, 3)
 
         package = {
-                'senderName': request.form.get('Sender_Name'),
-                'senderAddress': request.form.get('Sender_Address'),
-                'senderCity': request.form.get('Sender_City'),
-                'senderCountry': request.form.get('Sender_Country'),
-                'recipientName': request.form.get('Recipient_Name'),
-                'recipientAddress': request.form.get('Recipient_Address'),
-                'recipientCity': request.form.get('Recipient_City'),
-                'recipientCountry': recipientCountry,
-                'value': value,
-                'content': request.form.get('Content'),
-                'insuranceProvived': insuranceProvided,
-                'insuranceCharge': insuranceCharge,
-                'ipt': ipt,
-                'trackingNumber': trackingNumber,
-                'despatchDate': despatchDate,
-                #'orderURL': orderURL,
-                'acceptedAt': acceptedAt
-            }  
-        order = mongo.db.Package.insert_one(package)       
-        return redirect(url_for('orders', order = order.inserted_id))
-        
+            'senderName': request.form.get('Sender_Name'),
+            'senderAddress': request.form.get('Sender_Address'),
+            'senderCity': request.form.get('Sender_City'),
+            'senderCountry': request.form.get('Sender_Country'),
+            'recipientName': request.form.get('Recipient_Name'),
+            'recipientAddress': request.form.get('Recipient_Address'),
+            'recipientCity': request.form.get('Recipient_City'),
+            'recipientCountry': recipientCountry,
+            'value': value,
+            'content': request.form.get('Content'),
+            'insuranceProvived': insuranceProvided,
+            'insuranceCharge': insuranceCharge,
+            'ipt': ipt,
+            'trackingNumber': trackingNumber,
+            'despatchDate': despatchDate,
+            #'orderURL': orderURL,
+            'acceptedAt': acceptedAt
+        }
+        order = mongo.db.Package.insert_one(package)
+        return redirect(url_for('orders', order=order.inserted_id))
+
     return render_template("index.html")
 
 
@@ -82,8 +85,8 @@ def index():
 def orders(order):
 
     order = mongo.db.Package.find_one({"_id": ObjectId(order)})
-    return render_template("orders.html", order = order)
-  
+    return render_template("orders.html", order=order)
+
 
 if __name__ == "__main__":
     app.run(
