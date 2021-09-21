@@ -77,7 +77,6 @@ def index():
         }
         order = mongo.db.Package.insert_one(package)
         orderURL = 'https://github.com/GiovanniSalvi/Insurance_App/Orders/' + str(order.inserted_id)
-        print(orderURL)
         mongo.db.Package.update_one({'_id':order.inserted_id},{'$set':{'orderURL':orderURL}}, upsert = False)
         return redirect(url_for('orders', order=order.inserted_id))
 
