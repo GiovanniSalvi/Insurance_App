@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<<<<<<< HEAD
-<title>Insurance App</title>
-=======
-<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
 {% block body %}
-    <title>Insurance App</title>
->>>>>>> 046e846fd5a0a7cd723e821ee0fa20046de6c330
+<title>Insurance App</title>
+
 <body style="background-color: rgb(212, 241, 241);">
+    {% with messages = get_flashed_messages() %}
+    {{ message }}
+    {% endwith %}
     <div class="container" style="text-align: center;">
         <div>
             <form id="fcf-form-id" class="fcf-form-class" method="POST" action="{{ url_for('index') }}">
@@ -41,7 +40,8 @@
                         <label for="Country" class="fcf-label">Country</label>
                         <div class="fcf-input-group">
                             <input id="Country" name="Sender_Country" class="fcf-form-control"
-                                style="text-transform:uppercase" maxlength = "2" placeholder="format: GB - DE - FR - US - SP"  required></input>
+                                style="text-transform:uppercase" maxlength="2"
+                                placeholder="format: GB - DE - FR - US - SP" required></input>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,8 @@
                         <label for="Country" class="fcf-label">Country</label>
                         <div class="fcf-input-group">
                             <input id="Country" name="Recipient_Country" class="fcf-form-control"
-                                style="text-transform:uppercase" maxlength = "2" placeholder="format: GB - DE - FR - US - SP" required></input>
+                                style="text-transform:uppercase" maxlength="2"
+                                placeholder="format: GB - DE - FR - US - SP" required></input>
                         </div>
                     </div>
                     <div class="fcf-form-group">
@@ -86,7 +87,7 @@
                     <div class="fcf-form-group">
                         <label for="Value" class="fcf-label">Value</label>
                         <div class="fcf-input-group">
-                            <input type="number" id="Value" name="Value" class="fcf-form-control"  required>
+                            <input type="number" id="Value" name="Value" class="fcf-form-control" required>
                         </div>
                     </div>
                     <div class="fcf-form-group">
@@ -100,8 +101,8 @@
                         <div class="fcf-input-group">
                             <label>
                                 <select name="Insurance">
-                                    <option  value="True">Yes</option>
-                                    <option  value="False">No</option>
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
                                 </select>
                             </label>
                         </div>
