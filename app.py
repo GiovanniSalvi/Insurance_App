@@ -3,9 +3,9 @@ import json
 from flask import Flask, render_template, url_for, request, redirect, flash
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
-from pydantic import ValidationError
 import binascii
 import datetime
+from datetime import timedelta
 import time
 if os.path.exists("env.py"):
     import env
@@ -24,36 +24,23 @@ mongo = PyMongo(app)
 def index():
     if request.method == "POST":
         value = float(request.form.get('Value'))
-        print(value)
         despatchDate = (request.form.get('Date'))
-        print(despatchDate)
-        despatchDateObj = datetime.datetime.strptime(despatchDate,'%Y-%m-%d')
-        print(despatchDateObj)
         recipientCountry = request.form.get('Recipient_Country').upper()
         insuranceProvided = request.form.get('Insurance')
-        print(insuranceProvided)
         insuranceCharge = 0.00
         trackingNumber = binascii.b2a_hex(os.urandom(15))
-        print(trackingNumber)
         existing_trackingNumber = mongo.db.Package.find_one(
             {"trackingNumber": "trackingNumber"}
         )
-        orderURL = request.args.get('id')
-        print(orderURL)
         acceptedAt = datetime.datetime.now()
+        acceptedAtTomorrow = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
         acceptedAtObj = acceptedAt.strftime("%Y-%m-%d")
-        print(acceptedAt)
-        print(acceptedAtObj)
-        if existing_trackingNumber != True and despatchDateObj == acceptedAtObj:
-            print(despatchDate)              
+        orderURL = 'https://github.com/GiovanniSalvi/Insurance_App/Orders/'
+        if existing_trackingNumber != True and (despatchDate == acceptedAtObj or despatchDate == acceptedAtTomorrow):
             if value < 10000 and insuranceProvided == 'True':
-                print('true')
-                insuranceProvided == 'Yes'
-                print('yes')
+                insuranceProvided = 'Yes'
                 if recipientCountry == 'GB':
-                    print(recipientCountry)
                     insuranceCharge = round(value * 0.01, 3)
-                    print(insuranceCharge)
                 elif recipientCountry == 'DE' or recipientCountry == 'NE' or recipientCountry == 'FR' or recipientCountry == 'BE':
                     insuranceCharge = round(value * 0.015, 3)
                 else:
@@ -63,9 +50,7 @@ def index():
                      
             else:
                 insuranceCharge = 0.00
-                print(insuranceCharge)
-                insuranceProvided = 'No'
-                print(insuranceProvided)                
+                insuranceProvided = 'No'               
         else:
             raise ValueError("Operation is not allowed") 
             return redirect(url_for("index"))       
@@ -82,7 +67,7 @@ def index():
             'recipientCountry': recipientCountry,
             'value': value,
             'content': request.form.get('Content'),
-            'insuranceProvived': insuranceProvided,
+            'insuranceProvided': insuranceProvided,
             'insuranceCharge': insuranceCharge,
             'ipt': ipt,
             'trackingNumber': trackingNumber,
@@ -91,6 +76,8 @@ def index():
             'acceptedAt': acceptedAt
         }
         order = mongo.db.Package.insert_one(package)
+        orderURL = orderURL + str(order.inserted_id)
+        print(orderURL)
         return redirect(url_for('orders', order=order.inserted_id))
 
     return render_template("index.html")
@@ -107,5 +94,5 @@ if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
         port=int(os.environ.get("PORT", "5000")),
-        debug=True)
+        debug=False)
 
