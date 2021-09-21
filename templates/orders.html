@@ -1,82 +1,82 @@
 {% block body %}
 <h2 style="text-align: center;">Package</h2>
 <div style="text-align: center;">
-<form class="row" method="POST" action="{{ url_for('orders') }}"></form>
-<p style="font-size:xx-large;color:crimson">Sender Details</p>
-<div>
-    <div style="display: inline-flex; text-align: center;">
-        <h4>Name:<h3>{{ order.senderName }}</h3>
-        </h4>
-    </div>
-</div>
-<div>
-    <div style="display: inline-flex; text-align: center;">
-        <h4>Street Address:<h3>Tokyngton ave 192</h3>
-        </h4>
-    </div>
-</div>
-<div>
-    <div style="display: inline-flex; text-align: center;">
-        <h4>City:<h3> london</h3>
-        </h4>
-    </div>
-</div>
-<div>
-    <div style="display: inline-flex; text-align: center;">
-        <h4>Country:<h3 style="text-transform: uppercase;"> UK</h3>
-        </h4>
-    </div>
-</div>
+    <form class="row" method="GET">
+        <p style="font-size:xx-large;color:rgb(90, 74, 77)">Sender</p>
+        <div>
+            <div style="display: inline-flex; text-align: center;">
+                <h4>Name:<h3>{{ order.senderName }}</h3>
+                </h4>
+            </div>
+        </div>
+        <div>
+            <div style="display: inline-flex; text-align: center;">
+                <h4>Street Address:<h3>{{ order.senderAddress }}</h3>
+                </h4>
+            </div>
+        </div>
+        <div>
+            <div style="display: inline-flex; text-align: center;">
+                <h4>City:<h3>{{ order.senderCity }}</h3>
+                </h4>
+            </div>
+        </div>
+        <div>
+            <div style="display: inline-flex; text-align: center;">
+                <h4>Country:<h3 style="text-transform: uppercase;">{{ order.senderCountry }}</h3>
+                </h4>
+            </div>
+        </div>
 </div>
 <hr>
 <div class="recipient" style="text-align: center;">
-    <p style="font-size:xx-large;color:crimson">Recipient Details</p>
+    <p style="font-size:xx-large;color:rgb(90, 74, 77)">Recipient</p>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Name:<h3></h3>
+            <h4>Name:<h3>{{ order.recipientName }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Street Address:<h3> </h3>
+            <h4>Street Address:<h3>{{ order.recipientAddress }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>City:<h3> </h3>
+            <h4>City:<h3>{{ order.recipientCity }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Country:<h3> </h3>
+            <h4>Country:<h3 style="text-transform: uppercase;">{{ order.recipientCountry }}</h3>
             </h4>
         </div>
     </div>
     <br>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Value:<h3> </h3>
+            <h4>Value:<h3>{{ order.value }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Despatch Date:<h3> </h3>
+            <h4>Despatch Date:<h3>{{ order.despatchDate }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Content:<h3> </h3>
+            <h4>Content:<h3>{{ order.content }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Tracking Reference:<h3> </h3>
+            <h4>Tracking Reference:<h3>{{ order.trackingNumber}} </h3>
             </h4>
         </div>
     </div>
@@ -89,28 +89,34 @@
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Accepted at:<h3> </h3>
+            <h4>Accepted at:<h3>{{ order.acceptedAt }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Insurance Provided:<h3> </h3>
+            <h4>Insurance Provided:<h3>{{ order.insuranceProvided }}</h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>Insurance charge:<h3> </h3>
+            <h4>Insurance charge:<h3>{{ order.insuranceCharge }} </h3>
             </h4>
         </div>
     </div>
     <div>
         <div style="display: inline-flex; text-align: center;">
-            <h4>IPT charge:<h3> </h3>
+            <h4>IPT charge:<h3>{{ order.ipt }}</h3>
             </h4>
         </div>
     </div>
-</form>
+    </form>
 </div>
+<style>
+    h3{
+        color:rgb(238, 42, 42);
+        margin-left:5px;
+    }
+</style>
 {% endblock %}

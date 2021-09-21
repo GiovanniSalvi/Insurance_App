@@ -34,10 +34,10 @@
                     </div>
 
                     <div class="fcf-form-group">
-                        <label for="City" class="fcf-label">Country</label>
+                        <label for="Country" class="fcf-label">Country</label>
                         <div class="fcf-input-group">
                             <input id="Country" name="Sender_Country" class="fcf-form-control"
-                                style="text-transform:uppercase" required></input>
+                                style="text-transform:uppercase" maxlength = "2" placeholder="format: GB - DE - FR - US - SP"  required></input>
                         </div>
                     </div>
                 </div>
@@ -66,10 +66,10 @@
                     </div>
 
                     <div class="fcf-form-group">
-                        <label for="City" class="fcf-label">Country</label>
+                        <label for="Country" class="fcf-label">Country</label>
                         <div class="fcf-input-group">
                             <input id="Country" name="Recipient_Country" class="fcf-form-control"
-                                style="text-transform:uppercase" required></input>
+                                style="text-transform:uppercase" maxlength = "2" placeholder="format: GB - DE - FR - US - SP" required></input>
                         </div>
                     </div>
                     <div class="fcf-form-group">
@@ -82,7 +82,7 @@
                     <div class="fcf-form-group">
                         <label for="Value" class="fcf-label">Value</label>
                         <div class="fcf-input-group">
-                            <input type="number" id="Value" name="Value" class="fcf-form-control" required>
+                            <input type="number" id="Value" name="Value" class="fcf-form-control"  required>
                         </div>
                     </div>
                     <div class="fcf-form-group">
@@ -102,14 +102,8 @@
                             </label>
                         </div>
                     </div>
-                    <div class="fcf-form-group">
-                        <label for="Tracking_Number" class="fcf-label">Tracking Number</label>
-                        <div class="fcf-input-group">
-                            <input id="Tracking_Number" name="Tracking_Number" class="fcf-form-control"></input>
-                        </div>
-                    </div>
                     <br>
-                    <div class="fcf-form-group">
+                    <div class="fcf-form-group mb-3">
                         <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"">Submit</button>
                 </div>
         </div>
@@ -117,6 +111,10 @@
     </div>
     </div>
 </body>
-
+<style>
+    input{
+    min-width: 40%;
+}
+</style>
 </html>
 {% endblock %}
