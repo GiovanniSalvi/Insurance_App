@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 mongo = PyMongo(app)
 
@@ -35,7 +36,6 @@ def index():
         acceptedAt = datetime.datetime.now()
         acceptedAtTomorrow = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
         acceptedAtObj = acceptedAt.strftime("%Y-%m-%d")
-        orderURL = 'https://github.com/GiovanniSalvi/Insurance_App/Orders/'
         if existing_trackingNumber != True and (despatchDate == acceptedAtObj or despatchDate == acceptedAtTomorrow):
             if value < 10000 and insuranceProvided == 'True':
                 insuranceProvided = 'Yes'
@@ -72,12 +72,13 @@ def index():
             'ipt': ipt,
             'trackingNumber': trackingNumber,
             'despatchDate': despatchDate,
-            'orderURL': orderURL,
-            'acceptedAt': acceptedAt
+            'acceptedAt': acceptedAt,
+            'orderURL': ''
         }
         order = mongo.db.Package.insert_one(package)
-        orderURL = orderURL + str(order.inserted_id)
+        orderURL = 'https://github.com/GiovanniSalvi/Insurance_App/Orders/' + str(order.inserted_id)
         print(orderURL)
+        mongo.db.Package.update_one({'_id':order.inserted_id},{'$set':{'orderURL':orderURL}}, upsert = False)
         return redirect(url_for('orders', order=order.inserted_id))
 
     return render_template("index.html")
@@ -94,5 +95,5 @@ if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
         port=int(os.environ.get("PORT", "5000")),
-        debug=False)
+        debug=True)
 
